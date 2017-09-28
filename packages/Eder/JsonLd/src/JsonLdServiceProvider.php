@@ -14,6 +14,11 @@ class JsonLdServiceProvider extends ServiceProvider
     public function boot()
     {
         include __DIR__.'/routes.php';
+
+        $this->publishes([
+            __DIR__ . '/config' => config_path('jsonLd'),
+        ]);
+
     }
 
     /**
@@ -24,6 +29,10 @@ class JsonLdServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->make('Eder\JsonLd\JsonLdController');
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/companyInfo.php', 'companyInfo'
+        );
     }
 }
 

@@ -9,8 +9,7 @@ use Eder\JsonLd\JsonLdSerialize;
  */
 class JsonLd
 {
-
-	private $jsonLd = [];
+    private $jsonLd = [];
 
     /**
      * Returns the context.
@@ -33,7 +32,7 @@ class JsonLd
 
 	public function data($data='')
 	{
-		$this->jsonLd = $data;
+		$this->jsonLd += $data;
 
 		return $this;
 	}
@@ -46,6 +45,8 @@ class JsonLd
     		$jsonLd = "<script type='application/ld+json'>{$jsonLd}</script>";
     	}
 
+        $this->reset();
+
     	return $jsonLd;
     }
 
@@ -56,5 +57,17 @@ class JsonLd
     	}
 
 		return json_encode(new JsonLdSerialize($this->jsonLd), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * Reset states after an execution
+     *
+     * @return Returns the current instance.
+     */
+    protected function reset()
+    {
+        $this->jsonLd = [];
+
+        return $this;
     }
 }
