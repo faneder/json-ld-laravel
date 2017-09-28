@@ -1,13 +1,13 @@
 {
     "name": "eder/jsonid",
-    "description": "PHP JSON ID",
+    "description": "PHP Laravel JSON ID",
     "authors": [
         {
             "name": "Eder",
             "email": "faneder829@gmail.com"
         }
     ],
-    "keywords": ["jsonld", "laravel"],
+    "keywords": ["jsonld", "laravel", "php"],
     "license": "MIT",
     "type": "package",
     "require": {
