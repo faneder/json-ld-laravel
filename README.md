@@ -57,7 +57,7 @@ $data    = [
 	"datePosted" => config('jobPosting.datePosted'),
 	"description" => config('jobPosting.description'),
 	"hiringOrganization" => $this->organizationEmbedded(),
-    "jobLocation" => $this->placeEmbedded(),
+	"jobLocation" => $this->placeEmbedded(),
 	"title" => config('jobPosting.title'),
 	"validThrough" => config('jobPosting.validThrough'),
 	// Google recommended
