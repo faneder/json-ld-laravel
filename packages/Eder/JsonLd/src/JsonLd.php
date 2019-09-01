@@ -10,22 +10,22 @@ use Eder\JsonLd\JsonLdSerialize;
 class JsonLd
 {
     private $jsonLd = [];
-
+	
     /**
      * Returns the context.
-     * @param  $context array ['@context' => 'http://schema.org']
+     * @param  $context string 'http://schema.org'
      * @return json
      */
-	public function context($context=[])
+	public function context($context='http://schema.org')
 	{
-		$this->jsonLd += $context;
+		$this->jsonLd['@context'] = $context;
 
 		return $this;
 	}
 
 	public function type($type='')
 	{
-		$this->jsonLd += $type;
+		$this->jsonLd['@type'] = $type;
 
 		return $this;
 	}
@@ -50,13 +50,42 @@ class JsonLd
     	return $jsonLd;
     }
 
-    protected function toJson()
+    public function getEmbededJsonLd()
     {
-    	if (!$this->jsonLd) {
-    		throw new \RuntimeException("Error No JsonLd", 1);
-    	}
+    	$jsonLd = $this->toArray();
 
-		return json_encode(new JsonLdSerialize($this->jsonLd), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+        $this->reset();
+
+    	return $jsonLd;
+    }
+
+    protected function toArray()
+    {
+		$this->checkExistense();
+
+    	$jsonLd = $this->jsonLd;
+		unset($jsonLd["@context"]);
+
+		return $jsonLd;
+	}
+	
+    protected function checkExistense()
+    {
+		if (!$this->jsonLd) {
+    		throw new \RuntimeException("Error No JsonLd", 1);
+		};
+	}
+	
+    protected function toJson(bool $embedded = false)
+    {
+		$this->checkExistense();
+		
+    	$jsonLd = $this->jsonLd;
+		if ($embedded) {
+			unset($jsonLd["@context"]);
+		}
+
+		return json_encode(new JsonLdSerialize($jsonLd), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
     }
 
     /**
