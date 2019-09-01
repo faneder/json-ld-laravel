@@ -33,6 +33,18 @@ class JsonLdServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__ . '/config/companyInfo.php', 'companyInfo'
         );
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/jobPosting.php', 'jobPosting'
+        );
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/postalAddress.php', 'postalAddress'
+        );
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/monetaryAmount.php', 'monetaryAmount'
+        );
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/quantitativeValue.php', 'quantitativeValue'
+        );
     }
 }
 
